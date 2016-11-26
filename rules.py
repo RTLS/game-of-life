@@ -1,11 +1,12 @@
 """ Rules for Conway's Game of Life"""
+import numpy as np
 
 def advance(state):
 	""" Takes a state and returns the next state"""
 	width = len(state[0])
 	height = len(state)
 
-	next = [[0 for w in range(width)] for h in range(height)]
+	next = np.zeros((width,height), np.uint8)
 	for y in xrange(height):
 		for x in xrange(width):
 			neighbors = sumNeighbors(state,x,y,width,height)
