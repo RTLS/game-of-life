@@ -7,12 +7,21 @@ def advance(state):
 	height = len(state)
 
 	next = np.zeros((width,height), np.uint8)
-	for y in xrange(height):
-		for x in xrange(width):
-			neighbors = sumNeighbors(state,x,y,width,height)
+	for y in xrange(1,height-1):
+		for x in xrange(1,width-1):
+			neighbors = sumAllNeighbors(state,x,y)
 			next[y][x] = isAlive(state[y][x], neighbors)
 	
 	return next
+
+def sumAllNeighbors(state, x, y):
+	""" Sums the number of alive neighbors"""
+
+	sum = 0
+	for i in range(-1,2):
+		for j in range(-1,2):
+			sum +=  state[y+j][x+i]
+	return sum
 
 
 def sumNeighbors(state, x, y, width, height):
